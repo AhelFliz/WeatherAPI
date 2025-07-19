@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Weather in <%= @location.capitalize %></title>
+  </head>
+  <body style="padding-top: 20px; text-align: center; background-color: skyblue;">
+
+  	<form method="get" action="/">
+  		<input type=text id="loc" name="location" placeholder="p.ej. Barcelona" style="padding: 8px; border-radius: 8px;" />
+  		<button type="submit" style="border-radius: 8px;">Check weather</button>
+  	</form>
+
+  	<h1><%= @location.capitalize %> </h1>
+
+
+    <% if @weather["error"] %>
+      <p style="color: red;"> <%= @weather["error"] %></p>
+    <% else %>
+    	<% @weather["days"].each do |d| %>
+    		<h3>
+    			Day: <%= d["datetime"] %> =>
+      		H: <%= ((d["tempmax"] - 32) * 5.0 / 9.0).round(1) %> °C |
+     			L: <%= ((d["tempmin"] - 32) * 5.0 / 9.0).round(1) %> °C</h3>
+    	<% end %>
+    <% end %>
+  </body>
+</html>
+
